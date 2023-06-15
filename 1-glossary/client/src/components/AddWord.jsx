@@ -1,13 +1,13 @@
 import React from 'react';
 
-const AddWord = () => {
+const AddWord = ({onAddEntry, onDescriptionEntry, onAddSubmit}) => {
   return (
-    <div>
+    <form onSubmit={onAddSubmit}>
       <h3>Add a New Word!</h3>
-      <input type='text' placeholder='New word'></input>
-      <input type='text' placeholder='Definition'></input>
+      <input type='text' placeholder='New word' onChange={onAddEntry}></input>
+      <input type='text' placeholder='Definition' onChange={onDescriptionEntry}></input>
       <input type='submit'></input>
-    </div>
+    </form>
   );
 };
 
