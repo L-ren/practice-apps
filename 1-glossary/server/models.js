@@ -35,3 +35,17 @@ module.exports.getSearch = (searchTerm) => {
       .exec()
   );
 };
+
+module.exports.delete = (word) => {
+  return (
+    Glossary.findOneAndDelete({word})
+      .exec()
+  )
+};
+
+module.exports.edit = (word, definition) => {
+  return (
+    Glossary.findOneAndUpdate({word}, {word, definition: definition})
+      .exec()
+  )
+};

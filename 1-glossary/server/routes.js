@@ -31,4 +31,19 @@ router.post('/', (req, res) => {
   });
 });
 
+router.delete('/', (req, res) => {
+  let word = req.body.deletedWord;
+  models.delete(word).then(() => {
+    res.status(200).end()
+  })
+});
+
+router.put('/', (req, res) => {
+  let word = req.body.editedWord;
+  let definition = req.body.definition;
+  models.edit(word, definition).then(() => {
+    res.status(200).end()
+  })
+});
+
 module.exports = router;

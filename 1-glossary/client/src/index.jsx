@@ -53,12 +53,31 @@ const App = () => {
       console.log(err);
     })
   };
+  const onEdit = (e) => {
+    let editedWord = e.target.className;
+    let definition = prompt('Enter a new definition');
+    axios.put('http://localhost:3000/words', {editedWord, definition})
+      .then((response) => {
+        setWordList(wordList.map((word) => (word.word === editedWord) ? {word: editedWord, definition} : word));
+      }).catch((err) => {
+        console.log(err);
+      })
+  };
+  const onDelete = (e) => {
+    let deletedWord = e.target.className;
+    axios.delete('http://localhost:3000/words', {data: {deletedWord}})
+      .then((response) => {
+        setWordList(wordList.filter((word) => (word.word === deletedWord) ? 0 : 1));
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
 
   return (<div>
     <h1>GLOSSARY</h1>
     <Search onSearchEntry={onSearchEntry} onSearchSubmit={onSearchSubmit}/>
     <AddWord onAddEntry={onAddEntry} onDescriptionEntry={onDescriptionEntry} onAddSubmit={onAddSubmit}/>
-    <WordList wordList={wordList}/>
+    <WordList wordList={wordList} onEdit={onEdit} onDelete={onDelete}/>
   </div>)
 };
 
