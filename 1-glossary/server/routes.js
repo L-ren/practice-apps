@@ -1,29 +1,34 @@
 const express = require('express');
 const router = express.Router();
+const models = require('./models.js');
 
 router.use((req, res, next) => {
-  console.log(`serving request {req}`);
+  console.log(`serving ${req.method} request`);
   next()
 });
 
 router.get('/', (req, res) => {
-  console.log(`get request received`);
-  let fakeData = [];
-  res.end(JSON.stringify(fakeData))
+  models.getAll().then((data) => {
+    res.status(200).end(JSON.stringify(data))
+  })
 });
 
 router.post('/search', (req, res) => {
-  console.log(`get request for search received`)
-  console.log(`search text: ${req.body.searchText}`);
-  let fakeData = [];
-  res.end(JSON.stringify(fakeData))
+  models.getSearch(req.body.searchText).then((data) => {
+    res.status(201).end(JSON.stringify(data))
+  })
 });
 
 router.post('/', (req, res) => {
   let word = req.body.addedWord;
   let description = req.body.description;
-  console.log(`added word: ${word}`);
-  res.end(`post received!`)
+  models.addWord(word, description).then((success) => {
+    if (success) {
+      res.status(201).end()
+    } else {
+      res.status(409).send('word already exists');
+    }
+  });
 });
 
 module.exports = router;

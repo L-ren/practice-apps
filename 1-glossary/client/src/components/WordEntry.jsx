@@ -1,8 +1,7 @@
 import React from 'react';
 
-const WordEntry = () => {
-
-  return (<div>Word entry! </div>);
+const WordEntry = ({word, definition}) => {
+  return (<div>{word}:  {definition}</div>);
 };
 
 export default WordEntry;
