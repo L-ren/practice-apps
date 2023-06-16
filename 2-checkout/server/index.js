@@ -3,9 +3,10 @@ const express = require("express");
 const path = require("path");
 const sessionHandler = require("./middleware/session-handler");
 const logger = require("./middleware/logger");
+const router = require('./routes');
 
 // Establishes connection to the database on server start
-const db = require("./db");
+//const db = require("./db/db.js");   // do I need to keep this??
 
 const app = express();
 
@@ -17,15 +18,9 @@ app.use(sessionHandler);
 app.use(logger);
 
 // Serves up all static and generated assets in a specified folder.
-app.use(express.static(path.join(__dirname, /* FILL ME IN */)));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
-/****
- *
- *
- * Other routes here....
- *
- *
- */
+app.use('/api', router);
 
 app.listen(process.env.PORT);
 console.log(`Listening at http://localhost:${process.env.PORT}`);
