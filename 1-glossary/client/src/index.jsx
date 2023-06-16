@@ -14,7 +14,7 @@ const App = () => {
 
   // render list of all words on page load
   useEffect(() => {
-    axios.get('http://localhost:3000/words').then((response) => {
+    axios.get('/words').then((response) => {
       setWordList(response.data);
     }).catch((err) => {
       console.log(err);
@@ -27,7 +27,7 @@ const App = () => {
   const onSearchSubmit = (e) => {
     e.preventDefault();
     // REWRITE THIS REQUEST AS GET FOLLOW REST
-    axios.post('http://localhost:3000/words/search', {searchText}).then((response) => {
+    axios.get('/words/search', {params: {test: 'test'}}).then((response) => {
       setWordList(response.data);
     }).catch((err) => {
       console.log(err)
@@ -42,7 +42,7 @@ const App = () => {
   const onAddSubmit = (e) => {
     e.preventDefault();
     // include new word and description
-    axios.post('http://localhost:3000/words', {
+    axios.post('/words', {
       addedWord,
       description
     }).then((response) => {
@@ -56,7 +56,7 @@ const App = () => {
   const onEdit = (e) => {
     let editedWord = e.target.className;
     let definition = prompt('Enter a new definition');
-    axios.put('http://localhost:3000/words', {editedWord, definition})
+    axios.put('/words', {editedWord, definition})
       .then((response) => {
         setWordList(wordList.map((word) => (word.word === editedWord) ? {word: editedWord, definition} : word));
       }).catch((err) => {
@@ -65,7 +65,7 @@ const App = () => {
   };
   const onDelete = (e) => {
     let deletedWord = e.target.className;
-    axios.delete('http://localhost:3000/words', {data: {deletedWord}})
+    axios.delete('/words', {data: {deletedWord}})
       .then((response) => {
         setWordList(wordList.filter((word) => (word.word === deletedWord) ? 0 : 1));
       }).catch((err) => {

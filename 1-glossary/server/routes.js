@@ -13,8 +13,11 @@ router.get('/', (req, res) => {
   })
 });
 
-router.post('/search', (req, res) => {
-  models.getSearch(req.body.searchText).then((data) => {
+router.get('/search', (req, res) => {
+  // get params from url
+  console.log(req.params)
+  let search = 'app';
+  models.getSearch(search).then((data) => {
     res.status(201).end(JSON.stringify(data))
   })
 });
