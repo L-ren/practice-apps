@@ -26,7 +26,7 @@ const App = () => {
     e.preventDefault();
     let userDetails = {
       table: `user`,
-      id: document.cookie,
+      cookie: document.cookie,
       name: `${e.target.children[0].value} ${e.target.children[1].value}`,
       email: e.target.children[2].value,
       pw: e.target.children[3].value
@@ -45,7 +45,7 @@ const App = () => {
     e.preventDefault();
     let addressDetails = {
       table: `address`,
-      id: document.cookie,
+      cookie: document.cookie,
       line1: e.target.children[0].value,
       line2: e.target.children[1].value,
       city: e.target.children[2].value,
@@ -67,7 +67,7 @@ const App = () => {
     e.preventDefault();
     let paymentDetails = {
       table: `payment`,
-      id: document.cookie,
+      cookie: document.cookie,
       card: e.target.children[0].value,
       exp: e.target.children[1].value,
       cvv: e.target.children[2].value,

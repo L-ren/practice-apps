@@ -18,11 +18,13 @@ db.connectAsync()
       `CREATE TABLE IF NOT EXISTS user
         (
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+          cookie VARCHAR(45) NOT NULL,
           name VARCHAR(40) NOT NULL,
           email VARCHAR(40) NOT NULL,
-          pw VARCHAR(20) NOT NULL
-        );
-      `))
+          pw VARCHAR(20) NOT NULL,
+          UNIQUE KEY (cookie)
+        );`
+      ))
   .then(() =>
     db.queryAsync(
       `CREATE TABLE IF NOT EXISTS address
@@ -33,11 +35,12 @@ db.connectAsync()
          city VARCHAR(20) NOT NULL,
          state VARCHAR(20) NOT NULL,
          zip INT NOT NULL,
-         phone INT NOT NULL,
-         user_id INT NOT NULL,
-         FOREIGN KEY (user_id) REFERENCES user(id)
-        );
-      `))
+         phone VARCHAR(20) NOT NULL,
+         user_id INT,
+         FOREIGN KEY (user_id) REFERENCES user(id),
+         UNIQUE KEY (user_id)
+        );`
+      ))
   .then(() =>
     db.queryAsync(
       `CREATE TABLE IF NOT EXISTS payment
@@ -47,10 +50,11 @@ db.connectAsync()
           exp DATE NOT NULL,
           cvv INT NOT NULL,
           zip INT NOT NULL,
-          user_id INT NOT NULL,
-          FOREIGN KEY (user_id) REFERENCES user(id)
-        );
-      `))
+          user_id INT,
+          FOREIGN KEY (user_id) REFERENCES user(id),
+          UNIQUE KEY (user_id)
+        );`
+      ))
   .catch((err) => console.log(err));
 
 module.exports = db;

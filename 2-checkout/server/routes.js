@@ -4,14 +4,13 @@ const models = require('./db/models.js');
 const router = express.Router();
 
 router.post('/', (req, res) => {
-  models.add(req.body);
-  res.status(201).end('post success');
-    // .then((results) => {
-    //   // this should return a promise, put res.end in callback, and CATCH ERR
-    //   res.status(201).end('post success');
-    // }).catch((err) => {
-    //   console.log(err);
-    // });
+  models.add(req.body)
+    .then((results) => {
+      // console.log(results)
+      res.status(201).end('post success');
+    }).catch((err) => {
+      console.log(err);
+    });
 });
 
 router.get('/', (req, res) => {
