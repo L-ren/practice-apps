@@ -25,9 +25,11 @@ const App = () => {
   const onUserFormNext = (e) => {
     e.preventDefault();
     let userDetails = {
-      fullName: `${e.target.children[0].value} ${e.target.children[1].value}`,
+      table: `user`,
+      id: document.cookie,
+      name: `${e.target.children[0].value} ${e.target.children[1].value}`,
       email: e.target.children[2].value,
-      password: e.target.children[3].value
+      pw: e.target.children[3].value
     }
     setUserForm(false);
     setAddressForm(true);
@@ -42,8 +44,10 @@ const App = () => {
   const onAddressFormNext = (e) => {
     e.preventDefault();
     let addressDetails = {
-      addressLine1: e.target.children[0].value,
-      addressLine2: e.target.children[1].value,
+      table: `address`,
+      id: document.cookie,
+      line1: e.target.children[0].value,
+      line2: e.target.children[1].value,
       city: e.target.children[2].value,
       state: e.target.children[3].value,
       zip: e.target.children[4].value,
@@ -62,9 +66,11 @@ const App = () => {
   const onPaymentFormNext = (e) => {
     e.preventDefault();
     let paymentDetails = {
-      creditCard: e.target.children[0].value,
-      expiration: e.target.children[1].value,
-      CVV: e.target.children[2].value,
+      table: `payment`,
+      id: document.cookie,
+      card: e.target.children[0].value,
+      exp: e.target.children[1].value,
+      cvv: e.target.children[2].value,
       zip: e.target.children[3].value
     };
     axios.post('/api', paymentDetails)
@@ -80,6 +86,7 @@ const App = () => {
   const onConfirmationNext = (e) => {
     e.preventDefault;
     axios.get('/api')
+    // included document.cookie
       .then((response => {
         console.log(response);
       }))

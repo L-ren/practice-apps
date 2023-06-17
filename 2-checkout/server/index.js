@@ -16,6 +16,7 @@ app.use(sessionHandler);
 
 // Logs the time, session_id, method, and url of incoming requests.
 app.use(logger);
+app.use(express.json());
 
 // Serves up all static and generated assets in a specified folder.
 app.use(express.static(path.join(__dirname, '../client/dist')));

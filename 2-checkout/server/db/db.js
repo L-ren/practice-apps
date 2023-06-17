@@ -32,6 +32,7 @@ db.connectAsync()
          line2 VARCHAR(50),
          city VARCHAR(20) NOT NULL,
          state VARCHAR(20) NOT NULL,
+         zip INT NOT NULL,
          phone INT NOT NULL,
          user_id INT NOT NULL,
          FOREIGN KEY (user_id) REFERENCES user(id)
